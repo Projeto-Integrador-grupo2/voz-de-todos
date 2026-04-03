@@ -1,4 +1,4 @@
-# Voz de Todos
+# Voz de Todos - Richard
 
 Aplicação web para interação professor–aluno com **perguntas em tempo real** e **registro de respostas** para acompanhamento pedagógico.
 
