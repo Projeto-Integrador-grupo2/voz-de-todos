@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h3>Resultado</h3>
+
+    <p>Total de acertos: {{ acertos }}/{{ total }}</p>
+</div>
+
+{% for r in resultados %}
+<div class="card">
+    Questão: {{ r.questao }} <br>
+    Sua resposta: {{ r.resposta }} <br>
+    Correta: {{ r.correta }} <br>
+
+    {% if r.acertou %}
+        <span style="color:green;">✔ Acertou</span>
+    {% else %}
+        <span style="color:red;">✘ Errou</span>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

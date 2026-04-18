@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h3>Salas</h3>
+
+    <a href="{% url 'nova_sala' %}">
+        <button>Criar Nova Sala</button>
+    </a>
+    <a href="{% url 'salas' %}">
+        <button>Salas</button>
+    </a>
+</div>
+
+{% for sala in salas %}
+<div class="card">
+    <strong>{{ sala.nome }}</strong><br>
+    Status: {{ sala.ativa }}
+
+    <br><br>
+
+    <a href="{% url 'editar_sala' sala.id %}"><button>Editar</button></a>
+    <a href="{% url 'questoes' sala.id %}"><button>Questões</button></a>
+    <a href="{% url 'qrcode' sala.id %}"><button>QR Code</button></a>
+</div>
+{% endfor %}
+
+
+
+<select id="salaSelect">
+{% for s in salas %}
+<option value="{{ s.id }}">ID: {{ s.id }} | Código: {{ s.codigo }} | Nome: {{ s.nome }} | Ativa: {{ s.ativa }}</option>
+{% endfor %}
+</select>
+
+<canvas id="grafico"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+let chart = null;
+let controller = null;
+let carregando = false;
+
+async function carregarDados() {
+    if (carregando) return;
+    carregando = true;
+
+    const salaId = document.getElementById("salaSelect")?.value;
+    if (!salaId) return;
+
+    if (controller) controller.abort();
+    controller = new AbortController();
+
+    try {
+        const res = await fetch(`/stats/${salaId}/`, {
+            signal: controller.signal
+        });
+
+        const data = await res.json();
+
+        const labels = data.map(d => d.questao);
+        const acertos = data.map(d => d.acertos);
+
+        if (chart) chart.destroy();
+
+        chart = new Chart(document.getElementById('grafico'), {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Acertos',
+                    data: acertos,
+                    backgroundColor: '#38bdf8'
+                }]
+            }
+        });
+
+    } catch (e) {
+        console.log("Erro controlado");
+    }
+
+    carregando = false;
+}
+
+setInterval(carregarDados, 5000);
+
+document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) carregarDados();
+});
+</script>
+
+{% endblock %}

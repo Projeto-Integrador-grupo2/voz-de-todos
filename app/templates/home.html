@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Início{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h3>Acessar como:</h3>
+
+    <a href="{% url 'login' %}">
+        <button>Professor</button>
+    </a>
+
+    <br><br>
+
+    <a href="{% url 'aluno_login' %}">
+        <button>Aluno</button>
+    </a>
+</div>
+{% endblock %}

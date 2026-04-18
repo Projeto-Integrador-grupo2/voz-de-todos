@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h3>Questão</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="texto" value="{{ questao.texto }}">
+
+        <input type="text" name="opcao1" placeholder="Opção 1">
+        <input type="text" name="opcao2" placeholder="Opção 2">
+        <input type="text" name="opcao3" placeholder="Opção 3">
+        <input type="text" name="opcao4" placeholder="Opção 4">
+
+        <input type="number" name="correta" placeholder="Resposta correta (1-4)">
+
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+{% endblock %}

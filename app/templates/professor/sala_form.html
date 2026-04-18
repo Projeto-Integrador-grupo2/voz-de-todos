@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h3>Sala</h3>
+<div class="error-box">
+    {{ form.errors }}
+</div>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nome">Nome da Sala</label>
+        <input type="text" id="nome" name="nome" maxlength="100" value="{{ form.nome.value|default:'' }}">
+        <label for="codigo">Código da Sala</label>
+        <input type="text" id="codigo"name="codigo" maxlength="10" value="{{ form.codigo.value|default:'' }}">
+        <label for="ativa">Sala Ativa?</label>
+        <input type="checkbox" id="ativa" name="ativa" {% if form.ativa.value|default:False %}checked{% endif %}>
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+{% endblock %}

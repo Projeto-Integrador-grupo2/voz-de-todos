@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post">
+{% csrf_token %}
+
+{% for q in questoes %}
+<div class="card">
+    <p><strong>{{ q.texto }}</strong></p>
+
+    <label><input type="radio" name="q{{ q.id }}" value="1"> {{ q.opcao1 }}</label><br>
+    <label><input type="radio" name="q{{ q.id }}" value="2"> {{ q.opcao2 }}</label><br>
+    <label><input type="radio" name="q{{ q.id }}" value="3"> {{ q.opcao3 }}</label><br>
+    <label><input type="radio" name="q{{ q.id }}" value="4"> {{ q.opcao4 }}</label>
+</div>
+{% endfor %}
+
+<button type="submit">Finalizar</button>
+
+</form>
+{% endblock %}

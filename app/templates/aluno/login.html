@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h3>Entrar na Sala</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="sala" placeholder="Código da sala">
+        <input type="text" name="nome" placeholder="Seu nome">
+        <button type="submit">Entrar</button>
+    </form>
+</div>
+{% endblock %}

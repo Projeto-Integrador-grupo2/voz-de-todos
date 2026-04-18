@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h3>Salas</h3>
+
+    <a href="{% url 'nova_sala' %}">
+        <button>Criar Nova Sala</button>
+    </a>
+</div>
+
+{% for sala in salas %}
+<div class="card">
+    <strong>{{ sala.nome }}</strong><br>
+    Status: {{ sala.ativa }}
+
+    <br><br>
+
+    <a href="{% url 'editar_sala' sala.id %}"><button>Editar</button></a>
+    <a href="{% url 'questoes' sala.id %}"><button>Questões</button></a>
+    <a href="{% url 'qrcode' sala.id %}"><button>QR Code</button></a>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,14 @@
+#Instalacao:
+#Chamando este arquivo: pip install -r requirements.txt
+#Convencional: pip install django qrcode pillow
+
+
+django
+qrcode
+pillow
+
+
+#Exemplo pacote/versao:
+#requests==2.28.1 (Exact version)
+#numpy>=1.21.0 (Minimum version)
+#pandas (Latest available version)

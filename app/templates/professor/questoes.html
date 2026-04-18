@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h3>Questões</h3>
+
+    <a href="{% url 'nova_questao' sala.id %}">
+        <button>Nova Questão</button>
+    </a>
+</div>
+
+{% for q in questoes %}
+<div class="card">
+    {{ q.texto }}
+
+    <br><br>
+
+    <a href="{% url 'editar_questao' q.id %}">
+        <button>Editar</button>
+    </a>
+</div>
+{% endfor %}
+{% endblock %}
